@@ -3,16 +3,19 @@ from django.shortcuts import render
 
 def home_view(request):
     template_name = 'app/home.html'
+
     return render(request, template_name)
 
 
 def about_view(request):
     template_name = 'app/about.html'
+
     return render(request, template_name)
 
 
 def contacts_view(request):
     template_name = 'app/contacts.html'
+
     return render(request, template_name)
 
 
@@ -33,7 +36,7 @@ def examples_view(request):
         'img': 'imac.jpg'
     }]
     context = {
-        'items': items
+        'items': items,
     }
     return render(request, template_name,
                   context)
