@@ -1,0 +1,9 @@
+{% block sort %}
+    <ul class="nav">
+        <li><label class="navbar-brand">Сортировать по:</label></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'catalog_url' name='name' %}">Названию</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'catalog_url' name='price' %}">Начиная с дешевых</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'catalog_url' name='-price' %}">Начиная с дорогих</a></li>
+    </ul>
+{% endblock %}

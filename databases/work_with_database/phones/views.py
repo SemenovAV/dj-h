@@ -1,13 +1,17 @@
 from django.shortcuts import render
 
+from .models import Phone
 
-def show_catalog(request):
+
+def show_catalog(request, name='name'):
     template = 'catalog.html'
-    context = {}
+    phones = Phone.objects.all().order_by(name)
+    context = {'phones': phones}
     return render(request, template, context)
 
 
 def show_product(request, slug):
     template = 'product.html'
-    context = {}
+    phone = Phone.objects.get(slug=slug)
+    context = {'phone': phone}
     return render(request, template, context)

@@ -1,0 +1,13 @@
+{% block card %}
+    <article class="card">
+        <div class="card-body">
+            <header class="header">
+                <h2 class="card-title">
+                    <a href="{% url 'product_url' slug=phone.slug %}">{{ phone.name }}</a>
+                </h2>
+                <h3 class="card-subtitle">Стоимость: {{ phone.price }}р.</h3>
+            </header>
+            <img class="card-img-bottom" alt="{{ phone.title }}" src="{{ phone.image }}">
+        </div>
+    </article>
+{% endblock %}
