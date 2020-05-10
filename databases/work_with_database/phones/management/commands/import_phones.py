@@ -15,7 +15,8 @@ class Command(BaseCommand):
             title = next(phone_reader)
             title.append('slug')
             for line in phone_reader:
-                line[-1] = slugify(line[1])
+                line = line[:-1:]
+                line.append(slugify(line[1]))
                 Phone.objects.create(**{key: value for key, value in zip(title, line)})
 
 
