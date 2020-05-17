@@ -1,7 +1,7 @@
-from django import forms
-from .models import Review
-
 from ckeditor.widgets import CKEditorWidget
+from django import forms
+
+from .models import Review
 
 
 class ReviewAdminForm(forms.ModelForm):
