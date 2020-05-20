@@ -1,8 +1,7 @@
-from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 
-from .models import Product, Review
 from .forms import ReviewForm
+from .models import Product, Review
 
 
 def product_list_view(request):
@@ -19,15 +18,22 @@ def product_list_view(request):
 def product_view(request, pk):
     template = 'app/product_detail.html'
     product = get_object_or_404(Product, id=pk)
-
-    form = ReviewForm
-    if request.method == 'POST':
-        # логика для добавления отзыва
-        pass
-
+    session = request.session
+    session.setdefault('review', [])
     context = {
-        'form': form,
-        'product': product
+        'product': product,
+        'reviews': Review.objects.select_related('product').filter(product=product)
     }
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            Review.objects.create(**cleaned_data, product_id=pk)
+            session['review'] = session['review'] + [pk]
+        context['form'] = form
+    else:
+        context['form'] = ReviewForm
+    context['is_review_exist'] = pk in session['review']
 
     return render(request, template, context)
