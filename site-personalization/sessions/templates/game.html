@@ -1,0 +1,23 @@
+<p class="lead">
+    Попробуйте угадать число от 0 до 100 включительно :)
+</p>
+<form action="{% url 'home' %}" method="POST">
+    {% csrf_token %}
+    {% if  form.number.errors %}
+        <p class="alert alert-danger" role="alert">
+            {{ form.number.errors }}
+        </p>
+    {% endif %}
+    {% if more or less %}
+        <p class="alert alert-info" role="alert">
+            Вы не угадали. Загаданное число
+            {% if less %} больше {% elif more %} меньше {% endif %}
+            вашего.
+        </p>
+    {% endif %}
+
+    <label class="lead" for="{{ form.number.id_for_label }}">
+        Введите число: {{ form.number }}
+    </label>
+    <input class="lead" type="submit" value="Проверить">
+</form>

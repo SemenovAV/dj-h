@@ -1,0 +1,25 @@
+<p class="lead">
+    {% if is_author and game.is_active %}
+
+        Ваша игра активна. Ваше число
+        <span class="badge badge-info">{{ game.number }} </span>
+        пытались угадать {{ game_state.count }} раз.
+
+    {% elif is_author and not is_active_game %}
+
+        Ваша игра закончена. Ваш число
+        <span class="badge badge-info"> {{ game.number }} </span>
+        угадали с {{ game_state.count }} попыток.
+
+    {% elif not is_author and not is_active_game and not win %}
+
+        Игра в которой вы участвовали - закончена.
+        Число угадали с {{ game_state.count }} попыток.
+        Это число <span class="badge badge-info"> {{ game.number }} </span>
+
+    {% elif win %}
+
+        Вы угадали! Это число <span class="badge badge-info"> {{ game.number }} </span>.
+
+    {% endif %}
+</p>
