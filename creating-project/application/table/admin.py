@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import CsvFilename, Column
+
+
+@admin.register(Column)
+class ColumnAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CsvFilename)
+class CsvFilenameAdmin(admin.ModelAdmin):
+    pass

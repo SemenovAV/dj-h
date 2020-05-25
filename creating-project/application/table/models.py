@@ -12,7 +12,7 @@ class Column(models.Model):
 
 class CsvFilename(models.Model):
     path = models.FilePathField(
-        path='/',
-        match='^phones.csv$',
+        path='.',
+        match='.csv$',
         recursive=False
     )
