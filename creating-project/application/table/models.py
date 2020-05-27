@@ -9,6 +9,9 @@ class Column(models.Model):
     width = models.PositiveSmallIntegerField()
     ordinal_number = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return self.name
+
 
 class CsvFilename(models.Model):
     path = models.FilePathField(
@@ -16,3 +19,12 @@ class CsvFilename(models.Model):
         match='.csv$',
         recursive=False
     )
+
+    def get_path(self):
+        return self.path
+
+    def set_path(self, path):
+        self.path = path
+        return self.path
+    def __str__(self):
+        return self.path

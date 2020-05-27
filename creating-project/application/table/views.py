@@ -2,12 +2,14 @@ import csv
 from django.shortcuts import render
 from .models import Column, CsvFilename
 
-CSV_FILENAME = CsvFilename.objects.first().path
-COLUMNS = Column.objects.all().values().order_by('ordinal_number')
+#
 
 
 def table_view(request):
+    CSV_FILENAME = CsvFilename.objects.first().get_path()
+    COLUMNS = Column.objects.all().values().order_by('ordinal_number')
     template = 'table.html'
+
     with open(CSV_FILENAME, 'rt') as csv_file:
         header = []
         table = []
